@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 sqlite = ENV['SQLITE_VERSION']
 
+gem 'byebug'
+
 if sqlite
   gem 'sqlite3', sqlite, platforms: [:ruby]
 else

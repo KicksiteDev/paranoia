@@ -1,4 +1,5 @@
 require 'active_record' unless defined? ActiveRecord
+require 'byebug'
 
 if [ActiveRecord::VERSION::MAJOR, ActiveRecord::VERSION::MINOR] == [5, 2] ||
    ActiveRecord::VERSION::MAJOR > 5
@@ -63,6 +64,7 @@ module Paranoia
         @_disable_counter_cache = deleted?
         result = paranoia_delete
         next result unless result && ActiveRecord::VERSION::STRING >= '4.2'
+        byebug
         each_counter_cached_associations do |association|
           foreign_key = association.reflection.foreign_key.to_sym
           next if destroyed_by_association && destroyed_by_association.foreign_key.to_sym == foreign_key
